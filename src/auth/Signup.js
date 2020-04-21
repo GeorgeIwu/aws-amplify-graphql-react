@@ -1,5 +1,6 @@
 import React from 'react';
-import {useForm, useStore} from '../vlib/hooks'
+import { useStore } from '../Store';
+import {useForm} from '../_lib/hooks'
 
 const initialState = {
   email: '',
@@ -9,12 +10,21 @@ const initialState = {
   password: ''
 }
 
-const Signup = () => {
-  const {auth} = useStore()
-  const {values, errors, change} = useForm(initialState)
-  const {birthdate, given_name, family_name, gender, phone_number, email, password} = values
+const useFormWithStore = (initialState) => {
+  const {actions} = useStore()
+  const formProps = useForm(initialState)
 
-  const onSubmit = () => auth.signup(values)
+  return {
+    ...formProps,
+    actions
+  }
+}
+
+const Signup = () => {
+  const {values, errors, change, actions} = useFormWithStore(initialState)
+  const {given_name, family_name, phone_number, email, password} = values
+
+  const onSubmit = async () => actions.signup(values)
   const onChange = (e) => change(e.target)
 
   return (

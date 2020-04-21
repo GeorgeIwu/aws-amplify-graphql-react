@@ -1,0 +1,11 @@
+{
+    "AppSyncApiName": "famdoc",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": "false",
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authfamdocacde1503",
+            "Outputs.UserPoolId"
+        ]
+    }
+}

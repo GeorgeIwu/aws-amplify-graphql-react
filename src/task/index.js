@@ -1,5 +1,5 @@
 import React from 'react';
-import {PrivateRoute} from '../vlib/components'
+import {PrivateRoute} from '../_lib/components'
 import Tasks from './Tasks'
 import TaskNew from './TaskNew'
 

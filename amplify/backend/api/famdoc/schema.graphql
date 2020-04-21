@@ -1,5 +1,11 @@
 type Chat
   @model(subscriptions: null)
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: owner, ownerField: "members", operations: [read] }
+    ]
+  )
 {
   id: ID!
   name: String!
@@ -7,11 +13,13 @@ type Chat
   members: [String]
   messages: [Message]
     @connection(name: "ChatMessages", sortField: "createdAt", limit: 50)
+    @auth(rules: [{ allow: owner, ownerField: "members", operations: [read] }])
   createdAt: AWSDateTime!
 }
 
 type Message
   @model(subscriptions: null, queries: null)
+  @auth(rules: [{ allow: owner, operations: [create, update, delete] }])
 {
   id: ID!
   text: String

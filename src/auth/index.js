@@ -1,5 +1,5 @@
 import React from 'react';
-import {PublicRoute} from '../vlib/components'
+import {PublicRoute} from '../_lib/components'
 import Landing from './Landing';
 import Login from './Login';
 import Signup from './Signup';

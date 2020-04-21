@@ -1,5 +1,5 @@
 import React from 'react'
-import { HashRouter as Router, Route } from 'react-router-dom'
+import { HashRouter, Route } from 'react-router-dom'
 import { createBrowserHistory } from 'history';
 
 import Auth from './auth';
@@ -7,15 +7,15 @@ import Task from './task';
 
 const history = createBrowserHistory();
 
-function Main() {
+const Router = () => {
   return (
-    <Router history={history}>
+    <HashRouter history={history}>
       <div>
         <Route path="/" component={Auth} />
         <Route path="/task" component={Task} />
       </div>
-    </Router>
+    </HashRouter>
   )
 }
 
-export default Main
+export default Router

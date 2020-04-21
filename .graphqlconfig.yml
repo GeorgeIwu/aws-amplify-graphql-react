@@ -1,16 +1,15 @@
 projects:
-  traplord9000x:
-    schemaPath: src/graphql/schema.json
+  famdoc:
+    schemaPath: src/_lib/graphql/schema.json
     includes:
-      - src/graphql/**/*.js
+      - src/_lib/graphql/**/*.js
     excludes:
       - ./amplify/**
     extensions:
       amplify:
         codeGenTarget: javascript
         generatedFileName: ''
-        docsFilePath: src/graphql
-        graphQLApiId: x3dlqckl2rbndb4my5wwdspcpa
+        docsFilePath: src/_lib/graphql
 extensions:
   amplify:
     version: 3

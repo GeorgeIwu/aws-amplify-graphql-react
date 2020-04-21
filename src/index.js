@@ -7,8 +7,8 @@ import { Rehydrated } from 'aws-appsync-react'
 import { ApolloProvider } from 'react-apollo'
 
 import './index.css';
-// import Router from './Router';
-import Router from './task/Tasks';
+import Router from './Router';
+import Store from './Store';
 import config from './aws-exports'
 
 Amplify.configure(config)
@@ -22,17 +22,15 @@ const client = new AWSAppSyncClient({
   }
 });
 
-window.LOG_LEVEL = "DEBUG"
-
+// window.LOG_LEVEL = "DEBUG"
 const AppWithProvider = () => (
   <ApolloProvider client={client}>
     <Rehydrated
       render={({ rehydrated }) => (
-        rehydrated ? <Router /> : <p style={{ padding: 30, color: 'white' }}>Loading...</p>
+        rehydrated ? <Store><Router /></Store> : <p style={{ padding: 30, color: 'white' }}>Loading...</p>
       )}
     />
   </ApolloProvider>
 );
 
-// ReactDOM.createRoot(document.getElementById('root')).render(<AppWithProvider />);
 ReactDOM.render(<AppWithProvider />, document.getElementById('root'))

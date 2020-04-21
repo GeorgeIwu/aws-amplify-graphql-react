@@ -1,20 +1,27 @@
 {
-    "api": {
-        "traplord9000x": {
-            "service": "AppSync",
-            "providerPlugin": "awscloudformation",
-            "output": {
-                "authConfig": {
-                    "additionalAuthenticationProviders": [],
-                    "defaultAuthentication": {
-                        "authenticationType": "API_KEY",
-                        "apiKeyConfig": {
-                            "description": "main",
-                            "apiKeyExpirationDays": "365"
-                        }
-                    }
-                }
-            }
-        }
-    }
+	"auth": {
+		"famdocacde1503": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
+		}
+	},
+	"api": {
+		"famdoc": {
+			"service": "AppSync",
+			"providerPlugin": "awscloudformation",
+			"output": {
+				"authConfig": {
+					"additionalAuthenticationProviders": [],
+					"defaultAuthentication": {
+						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
+						"userPoolConfig": {
+							"userPoolId": "authfamdocacde1503"
+						}
+					}
+				}
+			}
+		}
+	},
+	"function": {}
 }

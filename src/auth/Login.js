@@ -1,13 +1,23 @@
 import React from 'react';
-import {useForm, useStore} from '../vlib/hooks'
+import { useStore } from '../Store';
+import {useForm} from '../_lib/hooks'
 
 const initialState = {phone_number: '', password: ''}
+const useFormWithStore = (initialState) => {
+  const {actions} = useStore()
+  const formProps = useForm(initialState)
+
+  return {
+    ...formProps,
+    actions
+  }
+}
+
 const Login = () => {
-  const {auth} = useStore()
-  const {values, errors, change} = useForm(initialState)
+  const {values, errors, change, actions} = useFormWithStore(initialState)
   const {phone_number, password} = values
 
-  const onSubmit = () => auth.login(values)
+  const onSubmit = () => actions.login(values)
   const onChange = (e) => change(e.target)
 
   return (

@@ -1,0 +1,20 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-famdoc-dev-140247-authRole",
+            "UnauthRoleArn": "arn:aws:iam::931465226631:role/amplify-famdoc-dev-140247-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::931465226631:role/amplify-famdoc-dev-140247-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-famdoc-dev-140247-deployment",
+            "UnauthRoleName": "amplify-famdoc-dev-140247-unauthRole",
+            "StackName": "amplify-famdoc-dev-140247",
+            "StackId": "arn:aws:cloudformation:us-east-1:931465226631:stack/amplify-famdoc-dev-140247/058d19a0-85a6-11ea-a49e-0ad4194c8c9d",
+            "AmplifyAppId": "d3bs36e1s69m7u"
+        },
+        "categories": {
+            "auth": {
+                "famdocacde1503": {}
+            }
+        }
+    }
+}

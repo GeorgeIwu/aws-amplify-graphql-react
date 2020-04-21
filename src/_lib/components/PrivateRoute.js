@@ -1,18 +1,18 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import { useStore } from '../hooks';
+import { useStore } from '../../Store';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const {auth} = useStore()
-  const isLoading = auth.isLoading
-  const isAuthed = auth.user && auth.user.sub
+  const {data} = useStore().auth
+  const isAuthed = data && data.email
+  console.log('username private', data && data.email)
 
+  console.log( isAuthed)
   return (
     <Route
       {...rest}
       render={props =>
-        isAuthed
-          ? isLoading ? <div>Loading</div> : <Component {...props} />
+        isAuthed ? <Component {...props} />
           : <Redirect to={{ pathname: `/`, state: { from: props.location } }}/>
       }
     />

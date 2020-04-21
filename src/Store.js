@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useReducer } from 'react';
-import {combineReducers} from '../utils'
-import {todosReducer, formReducer, authReducer} from '.'
+import {combineReducers} from './_lib/utils'
+import {todosReducer, formReducer, authReducer} from './_lib/hooks'
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -12,7 +12,7 @@ const initialState = localState || rootReducer(undefined, {type: undefined});
 
 const StoreContext = createContext();
 
-export const StoreProvider = ({ children }) => {
+export default ({ children }) => {
   const [state, dispatch] = useReducer(rootReducer, initialState);
 
   useEffect(() => {
@@ -21,13 +21,13 @@ export const StoreProvider = ({ children }) => {
 
   const props = {
     ...state,
-    auth: {
-      ...state.auth,
+    auth: state.auth,
+    actions: {
       signup: (data) => dispatch({type: "auth/signup", data, dispatch}),
       verify: (data) => dispatch({type: "auth/verify", data, dispatch}),
       login: (data) => dispatch({type: "auth/login", data, dispatch}),
       logout: (data) => dispatch({type: "auth/logout", data, dispatch}),
-    },
+    }
   }
 
   return (

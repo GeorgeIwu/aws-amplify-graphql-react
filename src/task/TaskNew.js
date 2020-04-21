@@ -1,9 +1,9 @@
 import React from 'react';
 import { v4 as uuid } from 'uuid';
-import {useForm} from '../vlib/hooks'
+import {useForm} from '../_lib/hooks'
 
 const AddTask = ({ onAdd, initialValues = {name: ''} }) => {
-  const {values, errors, onChange, onReset} = useForm(initialValues)
+  const {values, onChange, onReset} = useForm(initialValues)
   const id = values.id
 
   const handleAdd = () => {
