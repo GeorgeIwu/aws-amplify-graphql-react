@@ -1,11 +1,22 @@
-type DrumMachine @model {
+type Chat
+  @model(subscriptions: null)
+{
   id: ID!
-  clientId: ID!
-  beats: String!
   name: String!
+  owner: String
+  members: [String]
+  messages: [Message]
+    @connection(name: "ChatMessages", sortField: "createdAt", limit: 50)
+  createdAt: AWSDateTime!
 }
 
-type Subscription {
-  onUpdateByID(id: ID!): DrumMachine
-    @aws_subscribe(mutations: ["updateDrumMachine"])
+type Message
+  @model(subscriptions: null, queries: null)
+{
+  id: ID!
+  text: String
+  owner: String
+  chat: Chat @connection(name: "ChatMessages")
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
 }

@@ -1,25 +1,45 @@
-// eslint-disable
+/* eslint-disable */
 // this is an auto generated file. This will be overwritten
-import gql from 'graphql-tag'
 
-export const getDrumMachine = `query GetDrumMachine($id: ID!) {
-  getDrumMachine(id: $id) {
-    id
-    clientId
-    beats
-    name
-  }
-}
-`;
-export const listDrumMachines = gql`query ListDrumMachines {
-  listDrumMachines(limit: 500) {
-    items {
+export const getChat = /* GraphQL */ `
+  query GetChat($id: ID!) {
+    getChat(id: $id) {
       id
-      clientId
-      beats
       name
+      owner
+      members
+      messages {
+        items {
+          id
+          text
+          owner
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
     }
-    nextToken
   }
-}
+`;
+export const listChats = /* GraphQL */ `
+  query ListChats(
+    $filter: ModelChatFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listChats(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        owner
+        members
+        messages {
+          nextToken
+        }
+        createdAt
+      }
+      nextToken
+    }
+  }
 `;

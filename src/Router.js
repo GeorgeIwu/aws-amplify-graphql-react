@@ -1,17 +1,18 @@
 import React from 'react'
-import { HashRouter as Router, Switch, Route } from 'react-router-dom'
+import { HashRouter as Router, Route } from 'react-router-dom'
+import { createBrowserHistory } from 'history';
 
-import Machines from './Machines'
-import Machine from './DrumMachine'
+import Auth from './auth';
+import Task from './task';
+
+const history = createBrowserHistory();
 
 function Main() {
   return (
-    <Router>
+    <Router history={history}>
       <div>
-        <Switch>
-          <Route exact path="/" component={Machines} />
-          <Route path="/machine/:id/:name?" component={Machine} />
-        </Switch>
+        <Route path="/" component={Auth} />
+        <Route path="/task" component={Task} />
       </div>
     </Router>
   )

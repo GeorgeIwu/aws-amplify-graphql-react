@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /.pnp
+.DS_Store
 .pnp.js
 
 # testing

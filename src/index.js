@@ -7,7 +7,8 @@ import { Rehydrated } from 'aws-appsync-react'
 import { ApolloProvider } from 'react-apollo'
 
 import './index.css';
-import Router from './Router';
+// import Router from './Router';
+import Router from './task/Tasks';
 import config from './aws-exports'
 
 Amplify.configure(config)
@@ -33,4 +34,5 @@ const AppWithProvider = () => (
   </ApolloProvider>
 );
 
-ReactDOM.createRoot(document.getElementById('root')).render(<AppWithProvider />);
+// ReactDOM.createRoot(document.getElementById('root')).render(<AppWithProvider />);
+ReactDOM.render(<AppWithProvider />, document.getElementById('root'))
