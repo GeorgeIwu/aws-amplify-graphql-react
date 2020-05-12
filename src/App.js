@@ -3,7 +3,7 @@ import { HashRouter, Route } from 'react-router-dom'
 import { createBrowserHistory } from 'history';
 
 import Auth from './auth';
-import Task from './task';
+import Chat from './chat';
 
 const history = createBrowserHistory();
 
@@ -12,7 +12,7 @@ const Router = () => {
     <HashRouter history={history}>
       <div>
         <Route path="/" component={Auth} />
-        <Route path="/task" component={Task} />
+        <Route path="/chat" component={Chat} />
       </div>
     </HashRouter>
   )

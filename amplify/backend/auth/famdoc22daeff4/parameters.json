@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "famdocacde1503_identitypool_acde1503",
+    "identityPoolName": "famdoc22daeff4_identitypool_22daeff4",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "famdocacde1503",
-    "userPoolName": "famdocacde1503_userpool_acde1503",
+    "resourceNameTruncated": "famdoc22daeff4",
+    "userPoolName": "famdoc22daeff4_userpool_22daeff4",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -21,6 +21,7 @@
         "email",
         "family_name",
         "given_name",
+        "nickname",
         "phone_number"
     ],
     "userpoolClientGenerateSecret": true,
@@ -31,9 +32,9 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "famdocacde1503_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "famdoc22daeff4_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "resourceName": "famdocacde1503",
+    "resourceName": "famdoc22daeff4",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [

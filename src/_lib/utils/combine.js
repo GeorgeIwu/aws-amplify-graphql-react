@@ -26,11 +26,11 @@ const getInitialState = (reducerDict) => {
   }, {});
 }
 
-const sideEffect = async (dispatch, type, action) => {
+const withCallBack = async (action, callback) => {
   const res = await action()
-  dispatch({type, data: res, isSideEffectDone: true})
+  callback(res)
   return
 }
 
 
-export {combineReducers, sideEffect}
+export {combineReducers, withCallBack}

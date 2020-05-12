@@ -1,6 +1,6 @@
 {
 	"auth": {
-		"famdocacde1503": {
+		"famdoc22daeff4": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation",
 			"dependsOn": []
@@ -16,12 +16,11 @@
 					"defaultAuthentication": {
 						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
 						"userPoolConfig": {
-							"userPoolId": "authfamdocacde1503"
+							"userPoolId": "authfamdoc22daeff4"
 						}
 					}
 				}
 			}
 		}
-	},
-	"function": {}
+	}
 }

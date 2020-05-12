@@ -1,5 +1,5 @@
 type Chat
-  @model(subscriptions: null)
+  @model
   @auth(
     rules: [
       { allow: owner }
@@ -13,18 +13,17 @@ type Chat
   members: [String]
   messages: [Message]
     @connection(name: "ChatMessages", sortField: "createdAt", limit: 50)
-    @auth(rules: [{ allow: owner, ownerField: "members", operations: [read] }])
   createdAt: AWSDateTime!
 }
 
 type Message
-  @model(subscriptions: null, queries: null)
+  @model(queries: null)
   @auth(rules: [{ allow: owner, operations: [create, update, delete] }])
 {
   id: ID!
   text: String
   owner: String
-  chat: Chat @connection(name: "ChatMessages")
+  chat: Chat! @connection(name: "ChatMessages")
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
 }

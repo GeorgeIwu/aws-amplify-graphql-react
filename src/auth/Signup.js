@@ -1,30 +1,13 @@
 import React from 'react';
-import { useStore } from '../Store';
-import {useForm} from '../_lib/hooks'
-
-const initialState = {
-  email: '',
-  family_name: '',
-  given_name: '',
-  phone_number: '',
-  password: ''
-}
-
-const useFormWithStore = (initialState) => {
-  const {actions} = useStore()
-  const formProps = useForm(initialState)
-
-  return {
-    ...formProps,
-    actions
-  }
-}
+import { useStore, useForm } from '../_lib/hooks';
 
 const Signup = () => {
-  const {values, errors, change, actions} = useFormWithStore(initialState)
-  const {given_name, family_name, phone_number, email, password} = values
+  const {signup} = useStore().auth
 
-  const onSubmit = async () => actions.signup(values)
+  const {values, errors, change} = useForm({email: '', family_name: '', given_name: '', phone_number: '', password: ''})
+  const {given_name, family_name, phone_number, email, password, nickname} = values
+
+  const onSubmit = async () => signup(values)
   const onChange = (e) => change(e.target)
 
   return (
@@ -37,6 +20,8 @@ const Signup = () => {
       <input name='email' type='text' onChange={onChange} value={email} />
       <label htmlFor="phone_number">Phone number</label>
       <input name='phone_number' type='text' onChange={onChange} value={phone_number} />
+      <label htmlFor="nickname">Type</label>
+      <input name='nickname' type='text' onChange={onChange} value={nickname} />
       <label htmlFor="password">Password</label>
       <input name='password' type='password' onChange={onChange} value={password} />
       <button disabled={errors} onClick={onSubmit}>Sumbit</button>

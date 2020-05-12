@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import AddTask from './TaskNew'
+import AddTask from './ChatMembers'
 
 const Task = ({task, onEdit, onDelete}) => {
   const [isEditing, setIsEditing] = useState(false)
