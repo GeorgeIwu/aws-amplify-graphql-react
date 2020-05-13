@@ -13,6 +13,7 @@ export const onCreateChat = /* GraphQL */ `
           id
           text
           owner
+          type
           createdAt
           updatedAt
         }
@@ -34,6 +35,7 @@ export const onUpdateChat = /* GraphQL */ `
           id
           text
           owner
+          type
           createdAt
           updatedAt
         }
@@ -55,6 +57,7 @@ export const onDeleteChat = /* GraphQL */ `
           id
           text
           owner
+          type
           createdAt
           updatedAt
         }
@@ -70,6 +73,7 @@ export const onCreateMessage = /* GraphQL */ `
       id
       text
       owner
+      type
       chat {
         id
         name
@@ -91,6 +95,7 @@ export const onUpdateMessage = /* GraphQL */ `
       id
       text
       owner
+      type
       chat {
         id
         name
@@ -112,6 +117,7 @@ export const onDeleteMessage = /* GraphQL */ `
       id
       text
       owner
+      type
       chat {
         id
         name

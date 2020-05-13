@@ -23,7 +23,15 @@ type Message
   id: ID!
   text: String
   owner: String
+  type: MessageType!
   chat: Chat! @connection(name: "ChatMessages")
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
+}
+
+enum MessageType {
+    DRUG
+    SCAN
+    VITAL
+    FINANCE
 }
