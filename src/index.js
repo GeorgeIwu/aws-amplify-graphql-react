@@ -26,13 +26,9 @@ const client = new AWSAppSyncClient({
 // window.LOG_LEVEL = "DEBUG"
 const AppWithProvider = () => (
   <ApolloProvider client={client}>
-    <Rehydrated
-      render={({ rehydrated }) => (
-        !rehydrated
-          ? <p style={{ padding: 30, color: 'white' }}>Loading...</p>
-          : <StoreProvider><App /></StoreProvider>
-      )}
-    />
+    <Rehydrated>
+      <StoreProvider><App /></StoreProvider>
+    </Rehydrated>
   </ApolloProvider>
 );
 
