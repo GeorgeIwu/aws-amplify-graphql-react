@@ -1,35 +1,37 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-
-import Amplify from 'aws-amplify'
-import Auth from '@aws-amplify/auth';
-import AWSAppSyncClient from 'aws-appsync'
-import { Rehydrated } from 'aws-appsync-react'
-import { ApolloProvider } from 'react-apollo'
+import React, {useEffect, useState} from 'react';
+import ReactDOM from 'react-dom'
+import { ApolloProvider } from '@apollo/react-common'
 
 import './index.css';
-import App from './App';
-import {StoreProvider} from './_lib/hooks/useStore';
-import config from './aws-exports'
+import Router from './Router';
+import {StoreProvider as Store} from './_lib/hooks/useStore';
+import getApolloClient from './_lib/utils/apolloClient';
 
-Amplify.configure(config)
-const client = new AWSAppSyncClient({
-  url: config.aws_appsync_graphqlEndpoint,
-  region: config.aws_appsync_region,
-  auth: {
-    type: config.aws_appsync_authenticationType,
-    // apiKey: config.aws_appsync_apiKey,
-    jwtToken: async () => (await Auth.currentSession()).getIdToken().getJwtToken(),
-  }
-});
+// const client = new ApolloClient({
+//   link: ApolloLink.from([
+//     createAuthLink(config),
+//     createSubscriptionHandshakeLink(config)
+//   ]),
+//   cache: new InMemoryCache(),
+//   defaultOptions: {
+//     watchQuery: {
+//       fetchPolicy: 'cache-and-network'
+//     }
+//   }
+// })
 
-// window.LOG_LEVEL = "DEBUG"
-const AppWithProvider = () => (
-  <ApolloProvider client={client}>
-    <Rehydrated>
-      <StoreProvider><App /></StoreProvider>
-    </Rehydrated>
-  </ApolloProvider>
-);
+export default function App() {
+  const [client, setClient] = useState(null)
+  const [loading, setLoading] = useState(true)
 
-ReactDOM.render(<AppWithProvider />, document.getElementById('root'))
+  useEffect(() => {
+    getApolloClient().then((client) => {
+      setClient(client)
+      setLoading(false)
+    })
+  }, [])
+
+  return loading ? null : <ApolloProvider client={client}><Store><Router /></Store></ApolloProvider>
+}
+
+ReactDOM.render(<App />, document.getElementById('root'))

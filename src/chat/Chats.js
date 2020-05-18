@@ -1,55 +1,48 @@
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import gql from 'graphql-tag'
-import { graphql, compose } from 'react-apollo'
-import {buildSubscription} from 'aws-appsync'
-import { graphqlMutation } from 'aws-appsync-react'
+import { useQuery, useSubscription } from '@apollo/react-hooks'
 
 import {listChats} from '../_lib/graphql/queries'
-import {createChat} from '../_lib/graphql/mutations'
 import {onCreateChat} from '../_lib/graphql/subscriptions'
 import {useStore} from '../_lib/hooks'
 
 const ListChats = gql(listChats);
-const CreateChat = gql(createChat)
 const OnCreateChat = gql(onCreateChat);
 
-function Chats({history, ...props}) {
+function Chats({history}) {
+  const [ chats, setChats ] = useState([])
   const {auth: {data: {attributes: { sub: owner } } } } = useStore()
+  const { data: listChats } = useQuery(ListChats)
+  const { data: onCreateChat } = useSubscription(OnCreateChat, { variables: { owner } })
 
   useEffect(() => {
-    props.data.subscribeToMore(
-      buildSubscription({query: OnCreateChat, variables: { owner }}, ListChats)
-    )
-  }, [])
+    if (listChats) {
+      setChats(listChats.listChats.items || [])
+    }
+  }, [listChats])
 
-    return (
-      <div style={{}}>
-        <h1 style={{}}>Members</h1>
-        {
-          props.chats.map(chat => (
-            <div key={chat.id} style={chatStyle} onClick={() => history.push(`/chat/${chat.id}`)}>
-              <div style={{}}>
-                <p >{chat.name}</p>
-              </div>
+  useEffect(() => {
+    console.log({onCreateChat})
+  }, [onCreateChat])
+
+  return (
+    <div style={{}}>
+      <h1 style={{}}>Members</h1>
+      {
+        chats.map(chat => (
+          <div key={chat.id} style={chatStyle} onClick={() => history.push(`/chat/${chat.id}`)}>
+            <div style={{}}>
+              <p >{chat.name}</p>
             </div>
-          ))
-        }
-      </div>
-    )
+          </div>
+        ))
+      }
+    </div>
+  )
 }
 
-export default compose(
-  graphqlMutation(CreateChat, ListChats, 'Chats'),
-  graphql(ListChats, {
-    options: { fetchPolicy: 'cache-and-network' },
-    props: ({ data }) => ({
-      // asdasd: console.log(data),
-      chats: data.listChats ? data.listChats.items : [],
-      data
-    }),
-  })
-)(Chats)
+export default Chats
 
 const chatStyle = { padding: '10px', fontSize: 14, borderRadius: 4, border: '1px solid grey' }
 
