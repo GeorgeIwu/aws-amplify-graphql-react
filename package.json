@@ -8,7 +8,7 @@
     "aws-appsync": "^1.7.2",
     "aws-appsync-react": "^1.2.7",
     "react-apollo": "^2.5.5",
-    "aws-sdk": "^2.507.0",
+    "aws-sdk": "^2.814.0",
     "graphql-tag": "^2.10.1",
     "localforage": "^1.7.3",
     "now": "^12.1.5",
